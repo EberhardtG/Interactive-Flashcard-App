@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineering Flashcards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        #flashcard {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #question {
+            font-weight: bold;
+        }
+
+        #answer {
+            margin-top: 10px;
+            display: none; /* hidden initially */
+        }
+
+        button {
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AI Engineering Flashcards</h1>
+
+    <div id="flashcard">
+        <div id="question"></div>
+        <div id="answer"></div>
+    </div>
+
+    <p id="progress"></p>
+
+    <button id="show-answer-btn">Show Answer</button>
+    <button id="hide-answer-btn">Hide Answer</button>
+    <button id="next-btn">Next Question</button>
+
+    <script>
+        // Flashcard data
+        const questions = [
+            "What is FastAPI?",
+            "What is SQLAlchemy?",
+            "What is JWT?",
+            "What is pytest?",
+            "What is pandas?"
+        ];
+
+        const answers = [
+            "FastAPI is a high-performance Python web framework for building APIs.",
+            "SQLAlchemy is a Python SQL toolkit and ORM for working with relational databases.",
+            "JWT is a secure, compact token format for transmitting authentication data.",
+            "pytest is a Python testing framework for writing simple and scalable tests.",
+            "pandas is a Python library for data manipulation using DataFrames and Series."
+        ];
+
+        // Track current card index
+        let currentIndex = 0;
+
+        // DOM elements
+        const questionEl = document.getElementById("question");
+        const answerEl = document.getElementById("answer");
+        const progressEl = document.getElementById("progress");
+
+        // Update flashcard content
+        function updateCard() {
+            questionEl.textContent = questions[currentIndex];
+            answerEl.textContent = answers[currentIndex];
+            answerEl.style.display = "none"; // hide answer on card change
+            progressEl.textContent = `Card ${currentIndex + 1} of ${questions.length}`;
+        }
+
+        // Initial load
+        updateCard();
+
+        // Show Answer
+        document.getElementById("show-answer-btn").addEventListener("click", () => {
+            answerEl.style.display = "block";
+        });
+
+        // Hide Answer
+        document.getElementById("hide-answer-btn").addEventListener("click", () => {
+            answerEl.style.display = "none";
+        });
+
+        // Next Question (using modulo)
+        document.getElementById("next-btn").addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % questions.length;
+            updateCard();
+        });
+    </script>
+
+</body>
+</html>
